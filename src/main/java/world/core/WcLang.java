@@ -5,8 +5,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="wclang")
+//@Entity
+//@Table (name="wclang")
 public class WcLang extends PanacheEntity {
     //public Long id;
     public String langCde;

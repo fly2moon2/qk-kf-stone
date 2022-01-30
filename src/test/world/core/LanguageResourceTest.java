@@ -38,7 +38,7 @@ public class LanguageResourceTest {
             .extract()
             .response();
 
-    List<WcLang> languages = result.jsonPath().getList("$");
+    List<Language> languages = result.jsonPath().getList("$");
     assertThat(language, not(empty()));
     assertThat(languages, hasSize(3));
   }
@@ -46,13 +46,13 @@ public class LanguageResourceTest {
   @Test
   @Order(2)
   void testGetLanguage() {
-    WcLang language =
+    Language language =
         given()
             .when().get("/languages/{langCde}", "en")
             .then()
               .statusCode(200)
               .extract()
-              .as(WcLang.class);
+              .as(Language.class);
 
     assertThat(language.langCde, equalTo("en"));
     assertThat(language.lang, equalTo("English"));

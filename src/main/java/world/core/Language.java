@@ -1,17 +1,28 @@
 package world.core;
 
-public class Language {
-    public Long id;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="wclang")
+public class Language extends PanacheEntity {
+    //public Long id;
     public String langCde;
     public String lang;
 
-    public Language(Long id, String langCde, String lang) {
+    /*public WcLang(Long id, String langCde, String lang) {
         this.id=id;
         this.langCde=langCde;
         this.lang=lang;
     }
 
-    public Language() {
+    public WcLang() {
         
+    }*/
+
+    public static Language findByCde(String langCde){
+        return find("langCde",langCde).firstResult();
     }
 }

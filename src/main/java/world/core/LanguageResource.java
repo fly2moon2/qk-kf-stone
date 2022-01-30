@@ -19,14 +19,14 @@ import java.util.List;
 public class LanguageResource {
 
   @GET
-  public List<WcLang> allLanguages() {
-    return WcLang.listAll();
+  public List<Language> allLanguages() {
+    return Language.listAll();
   }
 
   @GET
   @Path("/{landCde}")
-  public WcLang getLanguage(@PathParam("landCde") String langCde) {
-    WcLang language = WcLang.findByCde(langCde);
+  public Language getLanguage(@PathParam("landCde") String langCde) {
+    Language language = Language.findByCde(langCde);
 
     if (language == null) {
       throw new WebApplicationException("Language code of " + langCde + " is not found.", 404);
@@ -37,7 +37,7 @@ public class LanguageResource {
 
   @POST
   @Transactional
-  public Response createLanguage(WcLang language) {
+  public Response createLanguage(Language language) {
     if (language.id != null) {
       throw new WebApplicationException("Id was invalidly set on request.", 400);
     }
@@ -49,7 +49,7 @@ public class LanguageResource {
   @PUT
   @Path("{langCde}/withdrawal")
   @Transactional
-  public WcLang update(@PathParam("accountNumber") Long accountNumber, String amount) {
+  public Language update(@PathParam("accountNumber") Long accountNumber, String amount) {
     Account entity = Account.findByAccountNumber(accountNumber);
 
     if (entity == null) {
