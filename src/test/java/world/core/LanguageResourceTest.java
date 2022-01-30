@@ -19,6 +19,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import java.math.BigDecimal;
 import java.util.List;
 
+import world.core.*;
+
 @QuarkusTest
 @QuarkusTestResource(H2DatabaseTestResource.class)
 @TestMethodOrder(OrderAnnotation.class)
@@ -39,8 +41,8 @@ public class LanguageResourceTest {
             .response();
 
     List<Language> languages = result.jsonPath().getList("$");
-    assertThat(language, not(empty()));
-    assertThat(languages, hasSize(3));
+    assertThat(languages, not(empty()));
+    assertThat(languages, hasSize(2));
   }
 
   @Test
@@ -48,13 +50,13 @@ public class LanguageResourceTest {
   void testGetLanguage() {
     Language language =
         given()
-            .when().get("/languages/{langCde}", "en")
+            .when().get("/languages/{langCde}", "EN")
             .then()
               .statusCode(200)
               .extract()
               .as(Language.class);
 
-    assertThat(language.langCde, equalTo("en"));
+    assertThat(language.langCde, equalTo("EN"));
     assertThat(language.lang, equalTo("English"));
   }
 /*
