@@ -50,14 +50,38 @@ public class LanguageResourceTest {
   void testGetLanguage() {
     Language language =
         given()
-            .when().get("/languages/{langCde}", "EN")
+            .when().get("/languages/{code}", "EN")
             .then()
               .statusCode(200)
               .extract()
               .as(Language.class);
 
-    assertThat(language.langCde, equalTo("EN"));
+    assertThat(language.code, equalTo("EN"));
     assertThat(language.lang, equalTo("English"));
+
+
+
+  }
+
+  @Test
+  void testCreateLanguage() {
+    Language lang = new Language();
+    lang.code="fr";
+    lang.lang="French";
+
+
+    Locale e=new Locale();
+    e.id=1L;
+    e.locale="fh";
+    e.lang=lang;
+    lang.locales.add(e);
+
+    given()
+        .contentType(ContentType.JSON)
+        .body(lang)
+        .when().post("/languages")
+        .then()
+        .statusCode(400);
   }
 /*
   @Test

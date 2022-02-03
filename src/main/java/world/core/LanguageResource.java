@@ -24,12 +24,12 @@ public class LanguageResource {
   }
 
   @GET
-  @Path("/{landCde}")
-  public Language getLanguage(@PathParam("landCde") String langCde) {
-    Language language = Language.findByCde(langCde);
+  @Path("/{code}")
+  public Language getLanguage(@PathParam("code") String code) {
+    Language language = Language.findByCode(code);
 
     if (language == null) {
-      throw new WebApplicationException("Language code of " + langCde + " is not found.", 404);
+      throw new WebApplicationException("Language code of " + code + " is not found.", 404);
     }
 
     return language;
