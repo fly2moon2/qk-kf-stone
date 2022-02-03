@@ -45,7 +45,7 @@ public class Language extends PanacheEntity {
 
 
     public static Language findByCode(String code){
-        return find("code",code).firstResult();
+        return find("code",code.toUpperCase()).firstResult();
     }
 
     public void addLocale(Locale locale) {

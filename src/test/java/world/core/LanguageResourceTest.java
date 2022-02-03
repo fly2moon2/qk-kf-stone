@@ -19,6 +19,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import world.core.*;
 
 @QuarkusTest
@@ -64,6 +66,7 @@ public class LanguageResourceTest {
   }
 
   @Test
+  @Transactional
   void testCreateLanguage() {
     Language lang = new Language();
     lang.code="fr";
@@ -71,17 +74,20 @@ public class LanguageResourceTest {
 
 
     Locale e=new Locale();
-    e.id=1L;
+    //e.id=1L;
     e.locale="fh";
     e.lang=lang;
     lang.locales.add(e);
 
-    given()
+    lang.persist();
+
+   /* given()
         .contentType(ContentType.JSON)
         .body(lang)
         .when().post("/languages")
         .then()
-        .statusCode(400);
+        .statusCode(200);*/
+
   }
 /*
   @Test

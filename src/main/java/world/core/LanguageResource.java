@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+
+import java.net.URI;
 //import java.math.BigDecimal;
 import java.util.List;
 
@@ -37,13 +39,58 @@ public class LanguageResource {
 
   @POST
   @Transactional
-  public Response createLanguage(Language language) {
-    if (language.id != null) {
+  public Response createLanguage(Language lang) {
+    if (lang.id != null) {
       throw new WebApplicationException("Id was invalidly set on request.", 400);
     }
 
-    language.persist();
-    return Response.status(201).entity(language).build();
+    lang.persist();
+    return Response.status(201).entity(lang).build();
+  }
+
+  @POST
+  @Transactional
+  public Response createLanguageSample2(Language lang) {
+      lang.persist();
+      return Response.created(URI.create("/persons/" + lang.id)).build();
+  }
+
+  @PUT
+  @Path("/{code}")
+  @Transactional
+  public Language update(@PathParam("code") String code, Language lang) {
+      Language entity = Language.findByCode(code);
+      if(entity == null) {
+          throw new NotFoundException();
+      }
+
+      // map all fields from the person parameter to the existing entity
+      entity.lang = lang.code;
+
+      return entity;
+  }
+
+  @DELETE
+  @Path("/{code}")
+  @Transactional
+  public void delete(@PathParam("code") String code) {
+    Language entity = Language.findByCode(code);
+    if(entity == null) {
+        throw new NotFoundException();
+    }
+      entity.delete();
+  }
+/*
+  @GET
+  @Path("/search/{name}")
+  public Person search(@PathParam("name") String name) {
+      return Person.findByName(name);
+  }
+*/
+  @GET
+  @Path("/count")
+  public Long count() {
+      return Language.count();
   }
 /*
   @PUT

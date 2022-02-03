@@ -15,7 +15,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Entity
 @Table (name="wclocale")
 public class Locale extends PanacheEntity {
-    @Column(nullable=false, length = 3)
+    @Column(nullable=false, length = 5)
     public String code;
     @Column(nullable=false, length = 30)
     public String locale;
