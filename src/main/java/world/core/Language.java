@@ -34,7 +34,7 @@ public class Language extends PanacheEntity {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-   // @JsonbTransient
+
     public List<Locale> locales = new ArrayList<>();
     
 /* 

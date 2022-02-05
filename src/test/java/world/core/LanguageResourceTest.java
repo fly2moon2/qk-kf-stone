@@ -69,7 +69,7 @@ public class LanguageResourceTest {
   @Transactional
   void testCreateLanguage() {
     Language lang = new Language();
-    lang.id=3L;
+    //lang.id=3L;
     lang.code="fr";
     lang.lang="French";
 
