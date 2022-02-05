@@ -28,7 +28,7 @@ import world.core.*;
 @TestMethodOrder(OrderAnnotation.class)
 public class LanguageResourceTest {
   @Test
-  @Order(1)
+  @Order(2)
   void testRetrieveAll() {
     Response result =
         given()
@@ -48,7 +48,7 @@ public class LanguageResourceTest {
   }
 
   @Test
-  @Order(2)
+  @Order(3)
   void testGetLanguage() {
     Language language =
         given()
@@ -66,6 +66,7 @@ public class LanguageResourceTest {
   }
 
   @Test
+  @Order(1)
   @Transactional
   void testCreateLanguage() {
     Language lang = new Language();
@@ -84,12 +85,13 @@ public class LanguageResourceTest {
     lang.addLocale(e);
     lang.persist();
 
-   /* given()
+    given()
         .contentType(ContentType.JSON)
         .body(lang)
         .when().post("/languages")
         .then()
-        .statusCode(200);*/
+        .statusCode(400);
+        // .statusCode(200); 
 
   }
 /*
