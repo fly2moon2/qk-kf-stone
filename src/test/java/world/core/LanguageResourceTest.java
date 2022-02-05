@@ -69,16 +69,19 @@ public class LanguageResourceTest {
   @Transactional
   void testCreateLanguage() {
     Language lang = new Language();
+    lang.id=3L;
     lang.code="fr";
     lang.lang="French";
 
 
     Locale e=new Locale();
     //e.id=1L;
-    e.locale="fh";
+    e.code="fh";
+    e.locale="french locale";
     e.lang=lang;
-    lang.locales.add(e);
+    //lang.locales.add(e);
 
+    lang.addLocale(e);
     lang.persist();
 
    /* given()

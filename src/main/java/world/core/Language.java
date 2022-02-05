@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.json.bind.annotation.JsonbTransient;
+import javax.json.bind.annotation.JsonbVisibility;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.MapKeyColumn;
@@ -32,7 +34,9 @@ public class Language extends PanacheEntity {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
+   // @JsonbTransient
     public List<Locale> locales = new ArrayList<>();
+    
 /* 
     @ElementCollection
     @CollectionTable(name="wclocale")
