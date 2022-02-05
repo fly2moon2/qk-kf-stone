@@ -34,7 +34,6 @@ public class Language extends PanacheEntity {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-
     public List<Locale> locales = new ArrayList<>();
     
 /* 

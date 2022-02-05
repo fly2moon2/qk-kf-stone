@@ -44,7 +44,7 @@ public class LanguageResourceTest {
 
     List<Language> languages = result.jsonPath().getList("$");
     assertThat(languages, not(empty()));
-    assertThat(languages, hasSize(2));
+    assertThat(languages, hasSize(3));
   }
 
   @Test

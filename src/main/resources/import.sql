@@ -10,6 +10,8 @@ Insert into wclocale (id, code, locale, lang_id) values (102, 'en_GB', 'English 
 Insert into wclocale (id, code, locale, lang_id) values (103, 'zh_TW', 'Traditional Chinese',102);
 Insert into wclocale (id, code, locale, lang_id) values (104, 'zh_CN', 'Simplified Chinese',102);
 
+Insert into akpref (id, code, dscrp, onoff, minval, maxval, parm) values (101,'WC001','Default language',true,null,null,'EN');
+
 Insert into wcreltyp (id, code, reltyp, dscrp) values (101, 'ISA', 'is-a', 'Is-a relationship');
 Insert into wcreltyp (id, code, reltyp, dscrp) values (102, 'HSA', 'has-a', 'Has-a relationship');
 Insert into wcreltyp (id, code, reltyp, dscrp) values (103, 'PNT', 'parent-of', 'Parent-of relationship');
