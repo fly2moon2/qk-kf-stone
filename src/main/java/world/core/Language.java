@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.json.bind.annotation.JsonbVisibility;
@@ -34,7 +36,8 @@ public class Language extends PanacheEntity {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    public List<Locale> locales = new ArrayList<>();
+    public Set<Locale> locales=new HashSet<>();
+    //public List<Locale> locales = new ArrayList<>();
     
 /* 
     @ElementCollection
