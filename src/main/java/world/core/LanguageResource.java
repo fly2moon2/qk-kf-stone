@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import java.net.URI;
 //import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +21,9 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class LanguageResource {
+
+/*   @ConfigProperty(name="app.lang.default")
+  String langDefault; */
 
   @GET
   public List<Language> allLanguages() {

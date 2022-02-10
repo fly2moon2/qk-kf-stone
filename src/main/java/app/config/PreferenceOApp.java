@@ -16,12 +16,9 @@ import javax.persistence.ElementCollection;
 
 @Entity
 @Table (name="akprefoapp")
-@AttributeOverride(name="code",column = @Column(unique = false))
-public class PreferenceOApp extends Preference {
+//@AttributeOverride(name="code",column = @Column(unique = false))
+public class PreferenceOApp extends PreferenceBase {
  //   public PreferenceScope scope=new PreferenceScope();
     public Long subjectId;
-
-    public String code;
-
 
 }

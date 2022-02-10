@@ -16,3 +16,7 @@ Insert into wcreltyp (id, code, reltyp, dscrp) values (101, 'ISA', 'is-a', 'Is-a
 Insert into wcreltyp (id, code, reltyp, dscrp) values (102, 'HSA', 'has-a', 'Has-a relationship');
 Insert into wcreltyp (id, code, reltyp, dscrp) values (103, 'PNT', 'parent-of', 'Parent-of relationship');
 Insert into wcreltyp (id, code, reltyp, dscrp) values (104, 'SBL', 'sibling-of', 'Sibling-of relationship');
+
+insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'CLN','Clinical');
+insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'TEC','Technology');
+insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'FIN','Finance');
