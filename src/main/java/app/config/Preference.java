@@ -17,18 +17,17 @@ import javax.persistence.ElementCollection;
 
 
 @Entity
-@Table (name="akpref")
-//@Table (name="akpref", uniqueConstraints={@UniqueConstraint(name="uk_akpref01",columnNames={"code"})})
+@Table (name="akpref", uniqueConstraints={@UniqueConstraint(name="uk_akpref01",columnNames={"code"})})
 //@Inheritance(strategy = InheritanceType.JOINED)
-public class Preference extends PreferenceBase {
+public class Preference extends PanacheEntity {
     //@ElementCollection
     //@CollectionTable(name="akprefscope")
     //public Set<PreferenceScope> scope=new HashSet<>();
-/*     @Column(nullable=false, length = 5, unique = true)
-    public String code; */
+    @Column(nullable=false, length = 5, unique = true)
+    public String code;
     @Column(nullable=false, length = 50)
     public String dscrp;
-/*     @Column(nullable=false)
+    @Column(nullable=false)
     public Boolean onoff;
     public Float minVal;
     public Float maxVal;
@@ -37,7 +36,7 @@ public class Preference extends PreferenceBase {
 
     public static Preference findByCode(String code){
         return find("code",code.toUpperCase()).firstResult();
-    } */
+    }
 
 
 }
