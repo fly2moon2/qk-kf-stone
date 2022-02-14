@@ -10,7 +10,9 @@ Insert into wclocale (id, code, locale, lang_id) values (102, 'en_GB', 'English 
 Insert into wclocale (id, code, locale, lang_id) values (103, 'zh_TW', 'Traditional Chinese',102);
 Insert into wclocale (id, code, locale, lang_id) values (104, 'zh_CN', 'Simplified Chinese',102);
 
-Insert into akpref (id, code, dscrp, onoff, minval, maxval, parm) values (101,'WC001','Default language',true,null,null,'EN');
+Insert into akprefcde (id, code, dscrp, actstatus) values (nextval('hibernate_sequence'),'WC001','Default language',1);
+
+Insert into akpref (id, code_id, prefscope, scopesubjid, onoff, minval, maxval, parm) values (nextval('hibernate_sequence'),1,1,8086,true,null,null,'EN');
 
 Insert into wcreltyp (id, code, reltyp, dscrp) values (101, 'ISA', 'is-a', 'Is-a relationship');
 Insert into wcreltyp (id, code, reltyp, dscrp) values (102, 'HSA', 'has-a', 'Has-a relationship');
@@ -20,3 +22,4 @@ Insert into wcreltyp (id, code, reltyp, dscrp) values (104, 'SBL', 'sibling-of',
 insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'CLN','Clinical');
 insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'TEC','Technology');
 insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'FIN','Finance');
+
