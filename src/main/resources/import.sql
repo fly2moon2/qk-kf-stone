@@ -4,15 +4,14 @@
 -- hence, the static id values in the sql insert statements start with 101 instead.
 Insert into wclang (id, code, lang) values (101, 'EN', 'English');
 Insert into wclang (id, code, lang) values (102, 'CN', 'Chinese');
+Insert into wclang (id, code, lang) values (103, 'JP', 'Japanese');
 
 Insert into wclocale (id, code, locale, lang_id) values (101, 'en_US', 'English US',101);
 Insert into wclocale (id, code, locale, lang_id) values (102, 'en_GB', 'English UK',101);
 Insert into wclocale (id, code, locale, lang_id) values (103, 'zh_TW', 'Traditional Chinese',102);
 Insert into wclocale (id, code, locale, lang_id) values (104, 'zh_CN', 'Simplified Chinese',102);
+Insert into wclocale (id, code, locale, lang_id) values (105, 'JP', 'Japanese',103);
 
-Insert into akprefcde (id, code, dscrp, actstatus) values (nextval('hibernate_sequence'),'WC001','Default language',1);
-
-Insert into akpref (id, code_id, prefscope, scopesubjid, onoff, minval, maxval, parm) values (nextval('hibernate_sequence'),1,1,8086,true,null,null,'EN');
 
 Insert into wcreltyp (id, code, reltyp, dscrp) values (101, 'ISA', 'is-a', 'Is-a relationship');
 Insert into wcreltyp (id, code, reltyp, dscrp) values (102, 'HSA', 'has-a', 'Has-a relationship');
@@ -23,3 +22,7 @@ insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'C
 insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'TEC','Technology');
 insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'FIN','Finance');
 
+-- Preferences
+Insert into akprefcde (id, code, dscrp, actstatus) values (101,'WC001','Default language',0);
+Insert into akpref (id, code_id, prefscope, scopesubjid, onoff, minval, maxval, parm) values (101,101,0,8086,true,null,null,'EN');
+Insert into akpref (id, code_id, prefscope, scopesubjid, onoff, minval, maxval, parm) values (102,101,3,101,true,null,null,'CN');

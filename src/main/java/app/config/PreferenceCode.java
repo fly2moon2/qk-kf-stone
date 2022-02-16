@@ -29,7 +29,7 @@ public class PreferenceCode extends PanacheEntity {
     )
     public Set<Preference> prefs=new HashSet<>();
 
-    public static Preference findByCode(String code){
+    public static PreferenceCode findByCode(String code){
         return find("code",code.toUpperCase()).firstResult();
     }
 }
