@@ -4,13 +4,21 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import world.core.ActiveStatus;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,9 +37,10 @@ public class Preference extends PanacheEntity {
     //@CollectionTable(name="akprefscope")
     //public Set<PreferenceScope> scope=new HashSet<>();
     //public PreferenceCode prefCode;
-    @JsonbTransient
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@JsonbTransient
+    //@ManyToOne(fetch = FetchType.LAZY)
     public PreferenceCode code;
+    @Enumerated(EnumType.STRING)
     public PreferenceScope prefScope;
     public Long scopeSubjId;
     @Column(nullable=false)
@@ -39,6 +48,10 @@ public class Preference extends PanacheEntity {
     public Float minVal;
     public Float maxVal;
     public String parm;
+    @CreationTimestamp
+    public LocalDate crtdOn;
+    @UpdateTimestamp
+    public LocalDateTime lastUpdOn;
     
 
 

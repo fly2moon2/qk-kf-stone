@@ -22,13 +22,13 @@ public class PreferenceCode extends PanacheEntity {
     public String dscrp;
     public ActiveStatus actStatus;
 
-    @OneToMany(
+/*     @OneToMany(
         mappedBy = "code",
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
     public Set<Preference> prefs=new HashSet<>();
-
+ */
     public static PreferenceCode findByCode(String code){
         return find("code",code.toUpperCase()).firstResult();
     }
