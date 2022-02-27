@@ -37,8 +37,8 @@ public class Preference extends PanacheEntity {
     //@CollectionTable(name="akprefscope")
     //public Set<PreferenceScope> scope=new HashSet<>();
     //public PreferenceCode prefCode;
-    //@JsonbTransient
-    //@ManyToOne(fetch = FetchType.LAZY)
+    @JsonbTransient
+    @ManyToOne(fetch = FetchType.LAZY)
     public PreferenceCode code;
     @Enumerated(EnumType.STRING)
     public PreferenceScope prefScope;
