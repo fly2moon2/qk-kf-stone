@@ -43,6 +43,8 @@ public class Preference extends PanacheEntity {
     @Enumerated(EnumType.STRING)
     public PreferenceScope prefScope;
     public Long scopeSubjId;
+    // true/false, no need to change to custom type, 'Y'/'N'
+    // @org.hibernate.annotations.Type(type = "yes_no")
     @Column(nullable=false)
     public Boolean onoff;
     public Float minVal;
