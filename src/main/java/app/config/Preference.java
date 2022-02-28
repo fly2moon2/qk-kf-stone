@@ -56,10 +56,9 @@ public class Preference extends PanacheEntity {
     public LocalDateTime lastUpdOn;
     
 
-
-/*     public static Preference findByCode(String code){
-        return find("code",code.toUpperCase()).firstResult();
-    } */
+    public static Preference findByCode(PreferenceCode code){
+        return find("code",code).firstResult();
+    }
 
 
 }

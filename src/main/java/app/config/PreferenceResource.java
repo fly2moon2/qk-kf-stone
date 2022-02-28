@@ -32,15 +32,33 @@ public class PreferenceResource {
 
   @GET
   @Path("/{code}")
+  public Preference getPreference(@PathParam("code") String code) {
+    PreferenceCode prefCde = PreferenceCode.findByCode(code);
+    Preference pref = null;
+
+    if (prefCde == null) {
+      throw new WebApplicationException("Preference code of " + code + " is not found.", 404);
+    } else {
+      pref = Preference.findByCode(prefCde);
+      if (pref == null) {
+        throw new WebApplicationException("Preference with code of " + code + " is not found.", 404);
+      }
+    }
+
+    return pref;
+  }
+
+/*   @GET
+  @Path("/{code}")
   public PreferenceCode getPreference(@PathParam("code") String code) {
     PreferenceCode prefCde = PreferenceCode.findByCode(code);
 
     if (prefCde == null) {
-      throw new WebApplicationException("Language code of " + code + " is not found.", 404);
+      throw new WebApplicationException("Preference code of " + code + " is not found.", 404);
     }
 
     return prefCde;
-  }
+  } */
 
 /*   @POST
   @Transactional
