@@ -12,6 +12,8 @@ import javax.ws.rs.ext.Provider;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import world.core.ActiveStatus;
+
 import java.net.URI;
 //import java.math.BigDecimal;
 import java.util.List;
@@ -30,11 +32,33 @@ public class PreferenceResource {
     return Preference.listAll();
   }
 
+  // findByCode, ActiveStatus only
   @GET
   @Path("/{code}")
   public Preference getPreference(@PathParam("code") String code) {
     PreferenceCode prefCde = PreferenceCode.findByCode(code);
+    // PreferenceCode prefCde = PreferenceCode.findByCodeSts(code, ActiveStatus.A);
     Preference pref = null;
+
+    if (prefCde == null) {
+      throw new WebApplicationException("Preference code of " + code + " is not found.", 404);
+    } else {
+      pref = Preference.findByCode(prefCde);
+      if (pref == null) {
+        throw new WebApplicationException("Preference with code of " + code + " is not found.", 404);
+      }
+    }
+
+    return pref;
+  }
+
+  @GET
+  @Path("/{code}/status/{status}")
+  public Preference getPreference(@PathParam("code") String code, @PathParam("status") String status) {
+    PreferenceCode prefCde = PreferenceCode.findByCodeSts(code, ActiveStatus.valueOf(status.toUpperCase()));
+    // PreferenceCode prefCde = PreferenceCode.findByCode(code);
+    Preference pref = null;
+    
 
     if (prefCde == null) {
       throw new WebApplicationException("Preference code of " + code + " is not found.", 404);

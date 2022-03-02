@@ -42,4 +42,8 @@ public class PreferenceCode extends PanacheEntity {
     public static PreferenceCode findByCode(String code){
         return find("code",code.toUpperCase()).firstResult();
     }
+
+    public static PreferenceCode findByCodeSts(String code, ActiveStatus status){
+        return find("code=?1 and actStatus=?2",code.toUpperCase(),status).firstResult();
+    }
 }
