@@ -1,7 +1,26 @@
 package world.core;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum ActiveStatus {
-    Active,
-    Inactive,
-    Discarded
+    A("Active"),
+    I("Inactive"),
+    D("Discarded");
+
+    private String dscr;
+
+    ActiveStatus(String dscr) {
+        this.dscr = dscr;
+    }
+
+    public String getDscr() {
+        return this.dscr;
+    }
+
+    public static Optional<ActiveStatus> fromCode(String dscr) {
+        return Arrays.stream(values())
+          .filter(item -> item.dscr.equalsIgnoreCase(dscr))
+          .findFirst();
+    }
 }
