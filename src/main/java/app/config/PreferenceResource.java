@@ -32,31 +32,27 @@ public class PreferenceResource {
     return Preference.listAll();
   }
 
-  // findByCode, ActiveStatus only
+  // findByCode - common use case, find from ActiveStatus.Active only
   @GET
   @Path("/{code}")
   public Preference getPreference(@PathParam("code") String code) {
-    PreferenceCode prefCde = PreferenceCode.findByCode(code);
-    // PreferenceCode prefCde = PreferenceCode.findByCodeSts(code, ActiveStatus.A);
-    Preference pref = null;
-
-    if (prefCde == null) {
-      throw new WebApplicationException("Preference code of " + code + " is not found.", 404);
-    } else {
-      pref = Preference.findByCode(prefCde);
-      if (pref == null) {
-        throw new WebApplicationException("Preference with code of " + code + " is not found.", 404);
-      }
-    }
-
-    return pref;
+    return getPreference(code, "A");
   }
 
+  // fbc - findByCode
+  // @PathParam - code
+  // @QueryParam - status (check null for optional queryparam. if null, find code from all records regardless of status)
+  // e.g. http://localhost:8080/preferences/fbc/wc001?status=a
   @GET
-  @Path("/{code}/status/{status}")
-  public Preference getPreference(@PathParam("code") String code, @PathParam("status") String status) {
-    PreferenceCode prefCde = PreferenceCode.findByCodeSts(code, ActiveStatus.valueOf(status.toUpperCase()));
-    // PreferenceCode prefCde = PreferenceCode.findByCode(code);
+  @Path("/fbc/{code}")
+  public Preference getPreference(@PathParam("code") String code, @QueryParam("status") String status) {
+    PreferenceCode prefCde = null;
+    if (status == null) {
+      prefCde = PreferenceCode.findByCode(code);
+    } else {
+      prefCde = PreferenceCode.findByCodeSts(code, ActiveStatus.valueOf(status.toUpperCase()));
+    }
+  
     Preference pref = null;
     
 
