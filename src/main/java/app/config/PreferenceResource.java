@@ -32,11 +32,12 @@ public class PreferenceResource {
     return Preference.listAll();
   }
 
-  // findByCode - common use case, find from ActiveStatus.Active only
+  // findByCode - common use case, find from active codes (ActiveStatus.Active) only
+  // shortcut to /fbc/{code}
   @GET
   @Path("/{code}")
   public Preference getPreference(@PathParam("code") String code) {
-    return getPreference(code, "A");
+    return getPreference(code, ActiveStatus.A.toString());
   }
 
   // fbc - findByCode
@@ -50,7 +51,7 @@ public class PreferenceResource {
     if (status == null) {
       prefCde = PreferenceCode.findByCode(code);
     } else {
-      prefCde = PreferenceCode.findByCodeSts(code, ActiveStatus.valueOf(status.toUpperCase()));
+      prefCde = PreferenceCode.findByCode(code, ActiveStatus.valueOf(status.toUpperCase()));
     }
   
     Preference pref = null;

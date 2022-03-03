@@ -39,11 +39,14 @@ public class PreferenceCode extends PanacheEntity {
     )
     public Set<Preference> prefs=new HashSet<>();
 
+    // findByCode - common use case, find from active codes (ActiveStatus.Active) only
     public static PreferenceCode findByCode(String code){
-        return find("code",code.toUpperCase()).firstResult();
+        return findByCode(code, ActiveStatus.A);
     }
 
-    public static PreferenceCode findByCodeSts(String code, ActiveStatus status){
-        return find("code=?1 and actStatus=?2",code.toUpperCase(),status).firstResult();
+    // findByCode - if status param. is null, find code from all records regardless of status
+    public static PreferenceCode findByCode(String code, ActiveStatus status){
+        return status != null ? find("code=?1 and actStatus=?2",code.toUpperCase(),status).firstResult()
+        : find("code",code.toUpperCase()).firstResult();
     }
 }
