@@ -87,7 +87,7 @@ public class PreferenceResource {
     if (prefCde == null) {
       throw new WebApplicationException("Preference code of " + code + " for scope " + scope + "(" + forobjid + ")" + " is not found.", 404);
     } else {
-      pref = Preference.findByCodeScopeObj(prefCde,PreferenceScope.valueOf(scope),forobjid);
+      pref = Preference.findByCodeScopeObj(prefCde,PreferenceScope.valueOf(scope.toUpperCase()),forobjid);
       if (pref == null) {
         throw new WebApplicationException("Preference code of " + code + " for scope " + scope + "(" + forobjid + ")" + " is not found.", 404);
       }

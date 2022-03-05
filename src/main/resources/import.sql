@@ -24,6 +24,9 @@ insert into wcdomain (id, code, domain) values (nextval('hibernate_sequence'),'F
 
 -- Preferences
 Insert into akprefcat (id, code, dscrp) values (101,'GEN','General');
-Insert into akprefcde (id, code, dscrp, actstatus, cat_id) values (101,'WC001','Default language','A', 101);
+Insert into akprefcat (id, code, dscrp) values (102,'ACS','Access');8
+Insert into akprefcat (id, code, dscrp) values (103,'MSG','Message');
+Insert into akprefcde (id, code, dscrp, actstatus, cat_id) values (101,'G01','Default language','A', 101);
+Insert into akprefcde (id, code, dscrp, actstatus, cat_id) values (102,'A01','Shortcut 1','A', 102);
 Insert into akpref (id, code_id, prefscope, forobjid, actStatus, minval, maxval, parm) values (101,101,'SYS',8086,'A',null,null,'EN');
 Insert into akpref (id, code_id, prefscope, forobjid, actStatus, minval, maxval, parm) values (102,101,'USR',101,'A',null,null,'CN');
