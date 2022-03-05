@@ -28,6 +28,7 @@ public class PreferenceCode extends PanacheEntity {
     public String code;
     @Column(nullable=false, length = 50)
     public String dscrp;
+    @Column(nullable=false, length = 1)
     @Enumerated(EnumType.STRING)
     public ActiveStatus actStatus;
 

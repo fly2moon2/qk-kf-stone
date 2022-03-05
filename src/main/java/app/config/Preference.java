@@ -29,8 +29,8 @@ import javax.persistence.ElementCollection;
 
 
 @Entity
-@Table (name="akpref")
-//@Table (name="akpref", uniqueConstraints={@UniqueConstraint(name="uk_akpref01",columnNames={"prefCode","prefScope","scopeSubjId"})})
+//@Table (name="akpref")
+@Table (name="akpref", uniqueConstraints={@UniqueConstraint(name="uk_akpref01",columnNames={"code_id","prefscope","forobjid"})})
 //@Inheritance(strategy = InheritanceType.JOINED)
 public class Preference extends PanacheEntity {
     //@ElementCollection
@@ -40,13 +40,17 @@ public class Preference extends PanacheEntity {
     @JsonbTransient
     @ManyToOne(fetch = FetchType.LAZY)
     public PreferenceCode code;
+    @Column(nullable=false, length = 5)
     @Enumerated(EnumType.STRING)
     public PreferenceScope prefScope;
-    public Long scopeSubjId;
-    // true/false, no need to change to custom type, 'Y'/'N'
+    public Long forObjId;
+/*     // true/false, no need to change to custom type, 'Y'/'N'
     // @org.hibernate.annotations.Type(type = "yes_no")
     @Column(nullable=false)
-    public Boolean onoff;
+    public Boolean onoff; */
+    @Column(nullable=false, length = 1)
+    @Enumerated(EnumType.STRING)
+    public ActiveStatus actStatus;
     public Float minVal;
     public Float maxVal;
     public String parm;
@@ -61,4 +65,7 @@ public class Preference extends PanacheEntity {
     }
 
 
+    public static Preference findByCodeScopeObj(PreferenceCode code, PreferenceScope scope, Long forObjId){
+        return find("code=?1 and prefScope=?2 and forObjId=?3",code,scope,forObjId).firstResult();
+    }
 }

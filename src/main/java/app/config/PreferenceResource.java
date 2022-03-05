@@ -69,6 +69,32 @@ public class PreferenceResource {
     return pref;
   }
 
+
+  @GET
+  @Path("/fbcso/{code}/{scope}/{forobjid}")
+  public Preference getPreferenceScopeObj(@PathParam("code") String code, @PathParam("scope") String scope, @PathParam("forobjid") Long forobjid, @QueryParam("status") String status) {
+
+
+    PreferenceCode prefCde = null;
+    if (status == null) {
+      prefCde = PreferenceCode.findByCode(code);
+    } else {
+      prefCde = PreferenceCode.findByCode(code, ActiveStatus.valueOf(status.toUpperCase()));
+    }
+ 
+    Preference pref = null;    
+
+    if (prefCde == null) {
+      throw new WebApplicationException("Preference code of " + code + " for scope " + scope + "(" + forobjid + ")" + " is not found.", 404);
+    } else {
+      pref = Preference.findByCodeScopeObj(prefCde,PreferenceScope.valueOf(scope),forobjid);
+      if (pref == null) {
+        throw new WebApplicationException("Preference code of " + code + " for scope " + scope + "(" + forobjid + ")" + " is not found.", 404);
+      }
+    }
+
+    return pref;
+  }
 /*   @GET
   @Path("/{code}")
   public PreferenceCode getPreference(@PathParam("code") String code) {
