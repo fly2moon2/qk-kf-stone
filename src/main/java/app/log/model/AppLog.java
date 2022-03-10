@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,7 +15,7 @@ import app.core.ModelEntityFamily;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-//@Table (name="agapplog")
+@Table (name="agapplog")
 //@Table (name="akpref", uniqueConstraints={@UniqueConstraint(name="uk_akpref01",columnNames={"code_id","prefscope","forobjid"})})
 //@Inheritance(strategy = InheritanceType.JOINED)
 public class AppLog extends PanacheEntity {
