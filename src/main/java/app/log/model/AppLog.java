@@ -9,20 +9,40 @@ import javax.persistence.Enumerated;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import app.core.AppLayer;
+import app.core.ModelEntityFamily;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-//@Table (name="atapplog")
+//@Table (name="agapplog")
 //@Table (name="akpref", uniqueConstraints={@UniqueConstraint(name="uk_akpref01",columnNames={"code_id","prefscope","forobjid"})})
 //@Inheritance(strategy = InheritanceType.JOINED)
 public class AppLog extends PanacheEntity {
-    @Column(nullable=false, length = 1)
+    // severity of the event whether error, critical etc.
+    @Column(nullable=false, length = 5)
     @Enumerated(EnumType.STRING)
-    public LogType logType;
+    public Severity severityLevel;
+    // custom event/error code of this app
     @Column(length = 5)
-    public String appCde;
+    public String appCode;
+    // trans. id of the app., an attempt to group log entries related to a given trans.
+    public Long tranId;
+    // applayer which returns the event/error code
     @Column(length = 5)
-    public String returnCde;
+    @Enumerated(EnumType.STRING)
+    public AppLayer retAppLayer;
+    @Column(length = 5)
+    public String retCode;
+    // payload
+    @Column(length = 100)
+    public String payLoad;
+    // key related entities (at most 2) and the instance id (applicable to 1 instance only)
+    @Column(length = 5)
+    public ModelEntityFamily relEntityA;
+    public Long relEntityAId;
+    @Column(length = 5)
+    public ModelEntityFamily relEntityB;
+    public Long relEntityBId;
     @CreationTimestamp
     public LocalDate crtdOn;
 }

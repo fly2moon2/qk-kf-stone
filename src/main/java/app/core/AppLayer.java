@@ -1,16 +1,19 @@
-package app.log.model;
+package app.core;
 
 import java.util.Arrays;
 import java.util.Optional;
 
-public enum SeverityType {
-    C("Critical"),
-    W("Warning"),
-    I("Information");
+public enum AppLayer {
+    UI("User Interface"),
+    REST("REST API"),
+    GRAPHQL("GraphQL"),
+    DB("Database"),
+    HTTP("HTTP"),
+    SFTP("SFTP");
 
     private String dscr;
 
-   SeverityType(String dscr) {
+   AppLayer(String dscr) {
         this.dscr = dscr;
     }
 
@@ -18,7 +21,7 @@ public enum SeverityType {
         return this.dscr;
     }
 
-    public static Optional<SeverityType> fromCode(String dscr) {
+    public static Optional<AppLayer> fromCode(String dscr) {
         return Arrays.stream(values())
           .filter(item -> item.dscr.equalsIgnoreCase(dscr))
           .findFirst();
