@@ -23,9 +23,6 @@ public class AppLog extends PanacheEntity {
     @Column(nullable=false, length = 5)
     @Enumerated(EnumType.STRING)
     public Severity severityLevel;
-    // custom event/error code of this app
-    @Column(length = 5)
-    public String appCode;
     // trans. id of the app., an attempt to group log entries related to a given trans.
     public Long tranId;
     // applayer which returns the event/error code
@@ -46,4 +43,9 @@ public class AppLog extends PanacheEntity {
     public Long relEntityBId;
     @CreationTimestamp
     public LocalDate crtdOn;
+
+    public static AppLog findByTranId(Long tranId){
+        return find("tranId",tranId).firstResult();
+    }
+
 }
