@@ -1,4 +1,4 @@
-package world.core;
+package app.log;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
@@ -12,6 +12,10 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import app.log.model.AppLog;
+import app.log.model.Severity;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,29 +30,29 @@ import world.core.*;
 @QuarkusTest
 @QuarkusTestResource(H2DatabaseTestResource.class)
 @TestMethodOrder(OrderAnnotation.class)
-public class LanguageResourceTest {
+public class AppLogResourceTest {
   @Test
-  @Order(1)
+  @Order(2)
   void testRetrieveAll() {
     Response result =
         given()
-          .when().get("/languages")
+          .when().get("/applogs")
           .then()
             .statusCode(200)
             .body(
-                containsString("English"),
-                containsString("Chinese")
+                containsString("CRIT"),
+                containsString("ERR")
             )
             .extract()
             .response();
 
-    List<Language> languages = result.jsonPath().getList("$");
-    assertThat(languages, not(empty()));
-    assertThat(languages, hasSize(3));
+    List<AppLog> applog = result.jsonPath().getList("$");
+    assertThat(applog, not(empty()));
+    //assertThat(languages, hasSize(3));
   }
 
-  @Test
-  @Order(2)
+/*   @Test
+  @Order(3)
   void testGetLanguage() {
     Language language =
         given()
@@ -61,34 +65,26 @@ public class LanguageResourceTest {
     assertThat(language.code, equalTo("EN"));
     assertThat(language.lang, equalTo("English"));
 
-
-
-  }
+  } */
 
   @Test
-  @Order(3)
+  @Order(1)
   @Transactional
-  void testCreateLanguage() {
-    Language lang = new Language();
-    //lang.id=3L;
-    lang.code="fr";
-    lang.lang="French";
+  void testCreateAppLog() {
+    AppLog applog = new AppLog();
+    applog.severityLevel = Severity.CRIT;
 
+    applog.persist();
 
-    Locale e=new Locale();
-    //e.id=1L;
-    e.code="fh";
-    e.locale="french locale";
-    e.lang=lang;
-    //lang.locales.add(e);
+    AppLog applog1 = new AppLog();
+    applog1.severityLevel = Severity.ERR;
 
-    lang.addLocale(e);
-    lang.persist();
+    applog1.persist();
 
     given()
         .contentType(ContentType.JSON)
-        .body(lang)
-        .when().post("/languages")
+        .body(applog)
+        .when().post("/applogs")
         .then()
         .statusCode(400);
         // .statusCode(200); 
