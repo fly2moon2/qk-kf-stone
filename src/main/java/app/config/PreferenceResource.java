@@ -27,6 +27,11 @@ public class PreferenceResource {
 /*   @ConfigProperty(name="app.lang.default")
   String langDefault; */
 
+  @ConfigProperty(name="msg.prefcode.notfound")
+  String msgPrefCodeNotFound;
+  @ConfigProperty(name="msg.pref.ofcode.notfound")
+  String msgPrefOfCodeNotFound;
+
   @GET
   public List<Preference> allPreferences() {
     return Preference.listAll();
@@ -58,11 +63,11 @@ public class PreferenceResource {
     
 
     if (prefCde == null) {
-      throw new WebApplicationException("Preference code of " + code + " is not found.", 404);
+      throw new WebApplicationException(msgPrefCodeNotFound.replace("{code}",code.toString()), 404);
     } else {
       pref = Preference.findByCode(prefCde);
       if (pref == null) {
-        throw new WebApplicationException("Preference with code of " + code + " is not found.", 404);
+        throw new WebApplicationException(msgPrefOfCodeNotFound.replace("{code}",code.toString()), 404);
       }
     }
 
