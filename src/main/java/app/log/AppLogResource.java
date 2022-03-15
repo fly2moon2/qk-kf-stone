@@ -27,6 +27,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class AppLogResource {
 
+  @ConfigProperty(name="msg.applog.tranid.notfound")
+  String msgTranIdNotFound;
 
   @GET
   public List<AppLog> allAppLogs() {
@@ -43,7 +45,7 @@ public class AppLogResource {
     
     appLog = AppLog.findByTranId(tranId);
     if (appLog == null) {
-      throw new WebApplicationException("Application log entry of tran id:" + tranId + " is not found.", 404);
+      throw new WebApplicationException(msgTranIdNotFound.replace("{tranId}", tranId.toString()) , 404);
     }
 
     return appLog;
@@ -72,6 +74,7 @@ public class AppLogResource {
     appLog.persist();
     return Response.status(201).entity(appLog).build();
   }
+
 
 /*   @POST
   @Transactional
