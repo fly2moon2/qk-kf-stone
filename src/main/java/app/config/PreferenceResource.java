@@ -1,6 +1,7 @@
 package app.config;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.transaction.Transactional;
@@ -11,7 +12,10 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import app.service.AppLogService;
+import app.service.LanguageService;
 import world.core.ActiveStatus;
 
 import java.net.URI;
@@ -31,6 +35,28 @@ public class PreferenceResource {
   String msgPrefCodeNotFound;
   @ConfigProperty(name="msg.pref.ofcode.notfound")
   String msgPrefOfCodeNotFound;
+
+/*   @Inject
+  @RestClient
+  AppLogService appLogService;
+
+  @GET
+  @Path("/applogs")
+  public Response listAllAppLogs() {
+    appLogService.allAppLogs();
+    return Response.ok().build();
+  } */
+  
+  @Inject
+  @RestClient
+  LanguageService langService;
+/* 
+  @GET
+  @Path("/languages")
+  public Response listAllLanguages() {
+    langService.allLanguages();
+    return Response.ok().build();
+  } */
 
   @GET
   public List<Preference> allPreferences() {

@@ -1,7 +1,5 @@
 package app.service;
 
-package app.service;
-
 import java.util.List;
 
 import javax.ws.rs.*;
