@@ -39,7 +39,7 @@ public class AppLogResource {
   // shortcut to /fbc/{code}
   @GET
   @Path("/{tranId}")
-  public AppLog getAddLog(@PathParam("tranId") Long tranId) {
+  public AppLog getAppLog(@PathParam("tranId") Long tranId) {
 
     AppLog appLog = null;
     
